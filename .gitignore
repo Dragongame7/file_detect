@@ -1,0 +1,17 @@
+.tools/
+**/bin/
+**/obj/
+artifacts/
+TestResults/
+.vs/
+*.user
+*.db
+*.db-shm
+*.db-wal
+.env
+.env.*
+!.env.example
+*.pfx
+*.p12
+*.key
+*.log

@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+ <PropertyGroup>
+  <OutputType>WinExe</OutputType><TargetFramework>net10.0-windows</TargetFramework><UseWPF>true</UseWPF>
+  <AssemblyName>FolderSentinel.Setup</AssemblyName><RuntimeIdentifier>win-x64</RuntimeIdentifier><SelfContained>true</SelfContained>
+  <PublishSingleFile>true</PublishSingleFile><IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract><EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+  <ApplicationIcon>..\..\assets\icon.ico</ApplicationIcon><ApplicationManifest>..\FolderSentinel.Desktop\app.manifest</ApplicationManifest>
+  <PayloadPath Condition="'$(PayloadPath)'==''">..\..\artifacts\payload.zip</PayloadPath>
+ </PropertyGroup>
+ <ItemGroup><EmbeddedResource Include="$(PayloadPath)" LogicalName="Payload.zip" Condition="Exists('$(PayloadPath)')"/></ItemGroup>
+ <Target Name="CheckPayload" BeforeTargets="PrepareForBuild"><Error Condition="!Exists('$(PayloadPath)')" Text="配布用のアプリが必要です。scripts/build.ps1 を実行してください。"/></Target>
+</Project>

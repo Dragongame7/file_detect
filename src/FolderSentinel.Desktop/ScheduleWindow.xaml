@@ -1,0 +1,31 @@
+<Window x:Class="FolderSentinel.Desktop.ScheduleWindow"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ Title="定期通知の予定" Style="{StaticResource {x:Type Window}}" Width="520" Height="520" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" Background="White">
+ <Grid Margin="28"><Grid.RowDefinitions><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+  <StackPanel>
+   <TextBlock Text="通知する日時を選ぶ" FontSize="22" FontWeight="SemiBold" Margin="0,0,0,20"/>
+   <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="18"/><ColumnDefinition Width="210"/></Grid.ColumnDefinitions>
+    <StackPanel><TextBlock Text="繰り返し" Style="{StaticResource Label}"/><ComboBox x:Name="FrequencyInput" SelectionChanged="FrequencyChanged"><ComboBoxItem Content="毎日"/><ComboBoxItem Content="毎週"/><ComboBoxItem Content="毎月"/></ComboBox></StackPanel>
+    <StackPanel Grid.Column="2"><TextBlock Text="時刻（24時間）" Style="{StaticResource Label}"/>
+     <StackPanel Orientation="Horizontal">
+      <ComboBox x:Name="HourInput" Width="76" MaxDropDownHeight="240" AutomationProperties.Name="通知する時"/>
+      <TextBlock Text="時" VerticalAlignment="Center" Margin="6,0,12,0"/>
+      <ComboBox x:Name="MinuteInput" Width="76" MaxDropDownHeight="240" AutomationProperties.Name="通知する分"/>
+      <TextBlock Text="分" VerticalAlignment="Center" Margin="6,0,0,0"/>
+     </StackPanel>
+    </StackPanel>
+   </Grid>
+   <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
+    <TextBlock Text="よく使う時刻" Style="{StaticResource Hint}" VerticalAlignment="Center" Margin="0,0,12,0"/>
+    <Button Content="09:00" Tag="9" Click="PresetTimeClick" Padding="10,5" Margin="0,0,6,0"/>
+    <Button Content="12:00" Tag="12" Click="PresetTimeClick" Padding="10,5" Margin="0,0,6,0"/>
+    <Button Content="18:00" Tag="18" Click="PresetTimeClick" Padding="10,5"/>
+   </StackPanel>
+   <StackPanel x:Name="WeeklyPanel" Margin="0,20,0,0"><TextBlock Text="曜日" Style="{StaticResource Label}"/><WrapPanel x:Name="DayChoices"/></StackPanel>
+   <StackPanel x:Name="MonthlyPanel" Margin="0,20,0,0"><TextBlock Text="日にち" Style="{StaticResource Label}"/><StackPanel Orientation="Horizontal"><TextBox x:Name="MonthDayInput" Width="70" MaxLength="2" AutomationProperties.Name="毎月の日にち"/><TextBlock Text="日" VerticalAlignment="Center" Margin="8,0,20,0"/><CheckBox x:Name="LastDayBox" Content="月末に通知" Checked="LastDayChanged" Unchecked="LastDayChanged"/></StackPanel><TextBlock Text="指定した日がない月は、その月の末日に通知します。" Style="{StaticResource Hint}" Margin="0,8,0,0"/></StackPanel>
+   <TextBlock x:Name="ZoneLabel" Style="{StaticResource Hint}" Margin="0,20,0,0"/>
+   <TextBlock x:Name="ErrorLabel" Foreground="#B14649" Margin="0,12,0,0"/>
+  </StackPanel>
+  <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right"><Button Content="キャンセル" IsCancel="True" Margin="0,0,8,0"/><Button Content="この予定を設定" Click="SaveSchedule" IsDefault="True" Style="{StaticResource Primary}"/></StackPanel>
+ </Grid>
+</Window>
