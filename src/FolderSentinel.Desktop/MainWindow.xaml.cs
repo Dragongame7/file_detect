@@ -80,7 +80,8 @@ public partial class MainWindow : Window
         HistoryPage.Visibility = page == "history" ? Visibility.Visible : Visibility.Collapsed;
         SettingsPage.Visibility = page == "settings" ? Visibility.Visible : Visibility.Collapsed;
         PageTitle.Text = page switch { "history" => "追加・通知の履歴", "settings" => "アプリの設定", _ => "監視フォルダ" };
-        PageSubtitle.Text = page switch { "history" => "ファイルの追加と通知の記録を、このPCに。", "settings" => "起動方法とデスクトップ通知を確認します。", _ => "追加を見逃さず、必要なタイミングで。" };
+        PageSubtitle.Text = page switch { "history" => "ファイルの追加と通知の記録を、このPCに。", "settings" => "起動方法とデスクトップ通知を確認します。", _ => "" };
+        PageSubtitle.Visibility = PageSubtitle.Text.Length == 0 ? Visibility.Collapsed : Visibility.Visible;
         foreach (var (button, selected) in new[] { (FoldersNav, page == "folders"), (HistoryNav, page == "history"), (SettingsNav, page == "settings") })
         { button.Background = selected ? new SolidColorBrush(Color.FromRgb(48, 76, 108)) : Brushes.Transparent; button.Foreground = selected ? Brushes.White : new SolidColorBrush(Color.FromRgb(197, 210, 225)); }
         if (page == "history") FilterHistory();

@@ -31,9 +31,9 @@ public sealed class NotificationService : IDisposable
         var names = p.FileNames.Take(2).Select(Path.GetFileName);
         var notification = new AppNotificationBuilder()
             .AddArgument("root", p.RootId)
-            .AddText($"{p.RootName} に {p.EventIds.Count:N0}件の追加")
-            .AddText(string.Join("、", names) + (p.EventIds.Count > 2 ? $" ほか{p.EventIds.Count - 2}件" : ""))
-            .AddText(p.Kind == "定期" ? "定期レポート · クリックしてフォルダを開く" : "クリックしてフォルダを開く")
+            .AddText(p.RootName)
+            .AddText($"新しいファイルを{p.EventIds.Count:N0}件検出しました" + (p.Kind == "定期" ? "（定期通知）" : ""))
+            .AddText(string.Join("、", names) + (p.EventIds.Count > 2 ? $"（ほか{p.EventIds.Count - 2}件）" : ""))
             .BuildNotification();
         notification.Tag = item.Id.ToString(System.Globalization.CultureInfo.InvariantCulture);
         notification.Group = "FolderSentinel";
